@@ -2,7 +2,25 @@
 
 ## Introducción a la sección                                     01:38
 
+:+1:
+
 ## Temas puntuales de la sección                                 00:20
+
+Esta es una sección corta, pero nos prepara el suelo para la sección 5. Aquí puntualmente trabajaremos lo siguiente:
+
+1. Navegación entre pantalla con su animación respectiva
+
+2. Cambiar el root de la aplicación (página inicial)
+
+3. Implementar un botón de retorno
+
+4. Módulo para agrupar todos los componentes personalizados que hagamos.
+
+5. Introducción al componente de listas de ionic
+
+6. Componente header
+
+El objetivo es dejar la base para la siguiente sección y tener una primera interacción con las funcionalidades del día a día de una aplicación de ionic.
 
 ## Inicio del proyecto - Componentes                             04:30
 
