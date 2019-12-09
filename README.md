@@ -715,7 +715,7 @@ De esta forma estamos incluyendo dinamicamente los diferentes componentes:
 
 <img src="images/listaConRouterLinkDetail.png">
 
-### Uso de <ion-icon> para pintar un icono
+### Uso de `ion-icon` para pintar un icono
 
 Podemos usar la etiqueta  `<ion-icon slot="start" [name]="c.icon"></ion-icon>` para que nos pinte el icono que definimos en el arreglo, con `slot="start"` lo colocamos al inicio:
 
@@ -740,3 +740,5 @@ Podemos usar la etiqueta  `<ion-icon slot="start" [name]="c.icon"></ion-icon>` p
 <img src="images/listaConIconos.png">
 
 ## Código fuente de la sección                                   00:19
+
+:+1:
