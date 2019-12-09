@@ -151,6 +151,7 @@ Aquí vamos a navegar entre páginas por lo cual crearemos dos páginas más:
 ### Crear nuevas páginas
 
 `ng generate page pages/alert --spec=false`
+
 `ng generate page pages/action-sheet --spec=false`
 
 Nos indica:
@@ -205,6 +206,73 @@ Podemos ver como se vera en un Iphone:
 <img src="images/action-sheetIphone.png">
 
 ## Back Button - Botón para regresar a la página anterior        07:38
+
+Vamos a implementar el Back Button en nuestras ppáginas **alert** y **action-sheet**. En el `header` dentro del `toolbar` podemos indicar que tendremos la sección de botones con el tag `<ion-buttons>` y dentro de ella poner el o los botones deseados en este caso `<ion-back-button>`, por lo que el código a insertar es:
+
+```js
+<ion-buttons>
+  <ion-back-button></ion-back-button>
+</ion-buttons>
+```
+
+Vamos a ver como se ve este botón en un Iphone y en un Pixel:
+
+
+<img src="images/backIphone.png">
+
+<img src="images/backPixel.png">
+
+Como se puede apreciar en el Iphone se ve bien pero no en el Pixel, en el Header es como si ubieran tres secciones para colocar los botones:
+
+<img src="images/seccionesHeader.png">
+
+### Atributo slot
+
+Como queremos forzar que nuestro botón de Back este en la primer sección en el Header lo forzamos con el atributo `slot="start"`, por lo que el código queda así:
+
+```js
+<ion-buttons slot="start">
+  <ion-back-button></ion-back-button>
+</ion-buttons>
+```
+
+Con esto nuestro botón Back ya se ve correcto en el Pixel:
+
+<img src="images/backPixelCorrecto.png">
+
+Pero ahora el problema que tenemos es que si estando en la página `action-sheet` y refrescamos la página el botón de Back desaparece.
+
+### Atributo defaultHref
+
+Para forzar que aunque refresquemos la pantalla el botón de Back siga apareciendo tenemos que poner el atributo `defaultHref="/"`, el / en teoria le dice que redireccione a la página / pero / no existe, en teoria entonces redirecciona a inicio por lo que tambien podría poner `defaultHref="/inicio"`, esto es para forzar a creer que hay una historia de páginas si se refresca la página. 
+
+### Atributo text
+
+Como podemos observar en Iphone el botón Back aparece como `<Back` si queremos cambiar ese texto poara que aparezca en español podemos usar el atributo `text` por lo que nuestro código queda así:
+
+```js
+<ion-buttons slot="start">
+  <ion-back-button text="Regresar" defaultHref="/"></ion-back-button>
+</ion-buttons>
+```
+
+Como podemos ver en el IPhone el texto ya sale en Español:
+
+<img src="images/regresarIphone.png">
+
+Pero ahora el texto también aparece en un Pixel (cosa que antes no hacia):
+
+<img src="images/regresarPixel.png">
+
+### Back Button en página alert
+
+Finalmente vamos a copiar el BackButon también en la página alert:
+
+```js
+<ion-buttons slot="start">
+  <ion-back-button text="Regresar" defaultHref="/"></ion-back-button>
+</ion-buttons>
+```
 
 ## Módulo de componentes - Header                                11:21
 
