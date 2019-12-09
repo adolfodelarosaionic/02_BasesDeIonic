@@ -146,6 +146,64 @@ const routes: Routes = [
 
 ## Navegación entre páginas                                      05:03
 
+Aquí vamos a navegar entre páginas por lo cual crearemos dos páginas más:
+
+### Crear nuevas páginas
+
+`ng generate page pages/alert --spec=false`
+`ng generate page pages/action-sheet --spec=false`
+
+Nos indica:
+
+```
+CREATE src/app/pages/alert/alert-routing.module.ts (343 bytes)
+CREATE src/app/pages/alert/alert.module.ts (465 bytes)
+CREATE src/app/pages/alert/alert.page.html (124 bytes)
+CREATE src/app/pages/alert/alert.page.ts (252 bytes)
+CREATE src/app/pages/alert/alert.page.scss (0 bytes)
+UPDATE src/app/app-routing.module.ts (614 bytes)
+
+CREATE src/app/pages/action-sheet/action-sheet-routing.module.ts (368 bytes)
+CREATE src/app/pages/action-sheet/action-sheet.module.ts (509 bytes)
+CREATE src/app/pages/action-sheet/action-sheet.page.html (131 bytes)
+CREATE src/app/pages/action-sheet/action-sheet.page.ts (279 bytes)
+CREATE src/app/pages/action-sheet/action-sheet.page.scss (0 bytes)
+UPDATE src/app/app-routing.module.ts (760 bytes)
+```
+
+Se crean las páginas con sus respectivos archivos de rutas y se modifica el archivo `app-routing.module.ts` para incluirlas.
+
+<img src="images/nuevasPaginas.png">
+
+Si queremos verlas basta poner su respectivo URL:
+
+`http://localhost:8100/alert`
+
+<img src="images/alert.png">
+
+`http://localhost:8100/action-sheet`
+<img src="images/action-sheet.png">
+
+### Navegar entre páginas
+
+Vamos a meter un par de botones en `inicio.page.html` que nos lleven a cada una de las páginas:
+
+```js
+<ion-content class="ion-padding">
+  <ion-button routerLink="/alert">Alert</ion-button>
+  <ion-button routerLink="/action-sheet">Action Sheet</ion-button>
+</ion-content>
+```
+<img src="images/botones.png">
+
+Estamos el método tradicional de Angular usando `routerLink` para movernos a la página deseada.
+
+Podemos ver como se vera en un Iphone:
+
+<img src="images/botonesIphone.png">
+<img src="images/alertIphone.png">
+<img src="images/action-sheetIphone.png">
+
 ## Back Button - Botón para regresar a la página anterior        07:38
 
 ## Módulo de componentes - Header                                11:21
