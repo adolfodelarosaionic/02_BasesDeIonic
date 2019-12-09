@@ -580,4 +580,163 @@ Finalmente así quedan las páginas:
 
 ## ion-list: Listas en ionic - Parte 1                           08:30
 
+Vamos a añadir una lista en nuestro archivo `inicio.page.html`
+
+```js
+<ion-list>
+  <ion-item>
+    <ion-label>Alert</ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>Action Sheet</ion-label>
+  </ion-item>
+</ion-list>
+```
+<img src="images/lista.png">
+
+### Añadir el RoutingLink para ir a las paginas
+
+Podemos añadir los routerLinks a los items para que se vaya a cada página:
+
+```js
+<ion-list>
+  <ion-item routerLink="/alert">
+    <ion-label>Alert</ion-label>
+  </ion-item>
+  <ion-item routerLink="/action-sheet">
+    <ion-label>Action Sheet</ion-label>
+  </ion-item>
+</ion-list>
+```
+
+Si cargamos la página apreciamos que en el iPhone nos pone `>` que ayuda a distinguir que esa opción de la lista nos llevará a otro lado, en cambio en Android la opción de la lista no se distigue para saber que pueda ser pulsada:
+
+<img src="images/listaConRouterLink.png">
+
+### Atributo Detail
+
+Para forzar que en Android tambien muestre el simbolo `>` podemos añadir el atributo `detail`
+
+```js
+<ion-list>
+  <ion-item routerLink="/alert" detail>
+    <ion-label>Alert</ion-label>
+  </ion-item>
+  <ion-item routerLink="/action-sheet" detail>
+    <ion-label>Action Sheet</ion-label>
+  </ion-item>
+</ion-list>
+```
+
+<img src="images/listaConRouterLinkDetail.png">
+
+La anterior sería la forma manual de incluir manualmente cada uno de los elementos de la lista, pero lo podemos hacer dinámicamente.
+
+### Crear la lista de componentes dinámicamente
+
+En nuestro archivo `inicio.page.html` vamos a quitar el segundo elemento de la lista y los botones.
+
+```js
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-title>Componentes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item routerLink="/alert" detail>
+      <ion-label>Alert</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
+```
+
+Ahora en el archivo `inicio.page.ts` vamos a incluir un array con todos los componentes que vamos a tener, pero estos componentes tienen que ser de tipo `Componente` para lo cual creamos una interface `Componente` con los datos que queramos y ya podemos incluir el array de ese tipo:
+
+```js
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-inicio',
+  templateUrl: './inicio.page.html',
+  styleUrls: ['./inicio.page.scss'],
+})
+export class InicioPage implements OnInit {
+
+  componentes: Componente[] = [
+    {
+      icon: 'american-football',
+      name: 'Action Sheet',
+      redirectTo: '/action-sheet'
+    },
+    {
+      icon: 'appstore',
+      name: 'Alert',
+      redirectTo: '/alert'
+    }
+  ];
+
+  constructor() { }
+
+  ngOnInit() {
+  }
+
+}
+
+interface Componente {
+  icon: string;
+  name: string;
+  redirectTo: string;
+}
+```
+
+### Uso del array de componentes
+
+Vamos a usar el array de componentes en nuestro archivo `inicio.page.ts`:
+
+```js
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-title>Componentes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item *ngFor="let c of componentes"
+              [routerLink]="c.redirectTo" detail>      
+      <ion-label>{{ c.name }}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
+```
+De esta forma estamos incluyendo dinamicamente los diferentes componentes:
+
+<img src="images/listaConRouterLinkDetail.png">
+
+### Uso de <ion-icon> para pintar un icono
+
+Podemos usar la etiqueta  `<ion-icon slot="start" [name]="c.icon"></ion-icon>` para que nos pinte el icono que definimos en el arreglo, con `slot="start"` lo colocamos al inicio:
+
+```js
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-title>Componentes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list>
+    <ion-item *ngFor="let c of componentes"
+              [routerLink]="c.redirectTo" detail>
+      <ion-icon slot="start" [name]="c.icon"></ion-icon>
+      <ion-label>{{ c.name }}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
+```
+
+<img src="images/listaConIconos.png">
+
 ## Código fuente de la sección                                   00:19
